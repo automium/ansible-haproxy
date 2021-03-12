@@ -6,9 +6,11 @@
     repo: 'ppa:vbernat/haproxy-{{ haproxy_version }}'
     state: present
     validate_certs: no
+  when: (ansible_distribution == "Debian") or
+        (ansible_distribution == "Ubuntu")
 
 - name: install HAProxy "{{ haproxy_version }}"
-  apt:
+  package:
     name: haproxy
     state: present
   notify:
